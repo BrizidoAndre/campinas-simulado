@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="WebServers">
+    <option name="servers">
+      <webServer id="a5648f77-68f5-46c0-be13-8d9d735e9034" name="SERVER-CAMPINAS">
+        <fileTransfer rootFolder="/var/www/html" accessType="SFTP" host="192.168.56.102" port="22" sshConfigId="96e5da16-85ed-4a89-b129-533f89afe910" sshConfig="competidor@192.168.56.102:22 password">
+          <advancedOptions>
+            <advancedOptions dataProtectionLevel="Private" keepAliveTimeout="0" passiveMode="true" shareSSLContext="true" />
+          </advancedOptions>
+        </fileTransfer>
+      </webServer>
+    </option>
+  </component>
+</project>

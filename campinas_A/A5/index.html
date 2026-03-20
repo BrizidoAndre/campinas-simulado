@@ -1,0 +1,154 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Multi-step Form</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: Arial, sans-serif;
+        }
+
+        .container {
+            height: 100vh;
+            width: 100vw;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        /*apply to slides by default*/
+        .box-shadow {
+            border-radius: .5rem;
+            box-shadow: 0 0 10px 0 rgba(0, 0, 0, .4);
+            padding: 2rem;
+        }
+
+        /*input radio only for sliding purposes*/
+        input[type=radio] {
+            display: none;
+        }
+
+        .slide {
+            animation: show .5s linear forwards;
+        }
+
+        /*showing from the right and translucent*/
+        @keyframes show {
+            from {
+                transform: translateX(10px);
+                opacity: 0;
+            }
+            to {
+                transform: translateX(0px);
+                opacity: 1;
+            }
+        }
+
+        /*styles to all buttons*/
+        .btn {
+            padding: .5rem 1rem;
+            border-radius: .5rem;
+            font-weight: bolder;
+            border: none;
+        }
+
+        .btn-primary {
+            background: dodgerblue;
+            color: white;
+        }
+
+        .btn-secondary {
+            background: dimgray;
+            color: white;
+        }
+
+        .container-input {
+            display: flex;
+            flex-direction: column;
+            margin: 1rem 0;
+        }
+
+        input {
+            border: 2px lightgray solid;
+            border-radius: .25rem;
+            padding: .3rem;
+        }
+
+        .row {
+            display: flex;
+            justify-content: space-between;
+        }
+
+        .slide {
+            display: none;
+        }
+
+        .third-slide p {
+            margin: 1rem 0;
+        }
+
+        /*    adding show up on demand feature*/
+        #first:checked ~ .first-slide,
+        #second:checked ~ .second-slide,
+        #third:checked ~ .third-slide {
+            display: block;
+        }
+    </style>
+</head>
+<body>
+<div class="container">
+    <form action="" class="box-shadow">
+<!--        inputs for sliding based on selected by the user-->
+        <input type="radio" name="slide" id="first" checked>
+        <input type="radio" name="slide" id="second">
+        <input type="radio" name="slide" id="third">
+        <div class="slide first-slide">
+            <h2>Personal Information</h2>
+            <div class="container-input">
+                <label for="name">Name</label>
+                <input type="text" id="name">
+            </div>
+            <div class="container-input">
+                <label for="email">Email</label>
+                <input type="email" id="email">
+            </div>
+            <div class="row">
+                <label for="second" class="btn btn-primary">Next</label>
+            </div>
+        </div>
+        <div class="slide second-slide">
+            <h2>Address</h2>
+            <div class="container-input">
+                <label for="street">Street</label>
+                <input type="text" id="street">
+            </div>
+            <div class="container-input">
+                <label for="city">City</label>
+                <input type="text" id="city">
+            </div>
+            <div class="row">
+                <label for="first" class="btn btn-secondary">Back</label>
+                <label for="third" class="btn btn-primary">Next</label>
+            </div>
+        </div>
+        <div class="slide third-slide">
+            <h2>Confirm</h2>
+            <p>Please confirm your details before submitting.</p>
+            <div class="row">
+                <label for="second" class="btn btn-secondary">Back</label>
+                <button class="btn btn-primary">Submit</button>
+            </div>
+        </div>
+    </form>
+</div>
+</body>
+</html>

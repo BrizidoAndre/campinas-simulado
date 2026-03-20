@@ -1,0 +1,128 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Drawing Tool</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        .container-canvas {
+            resize: both;
+            overflow: scroll;
+            border: 1px solid black;
+            width: min-content;
+            height: min-content;
+        }
+
+        .container-canvas::-webkit-scrollbar {
+            display: none;
+        }
+
+        canvas {
+            width: 300px;
+            height: 300px;
+            outline: 1px solid black;
+        }
+
+        .colors {
+            width: 30px;
+            aspect-ratio: 1;
+            border: none;
+            cursor: pointer;
+        }
+
+        #black {
+            background: black;
+        }
+
+        #red {
+            background: red;
+        }
+
+        #yellow {
+            background: yellow;
+        }
+
+        #green {
+            background: green;
+        }
+
+        #blue {
+            background: blue;
+        }
+    </style>
+</head>
+<body>
+<div class="container-canvas">
+    <canvas id="canvas" width="300px" height="300px">
+
+    </canvas>
+</div>
+<button class="colors" id="black"></button>
+<button class="colors" id="red"></button>
+<button class="colors" id="yellow"></button>
+<button class="colors" id="green"></button>
+<button class="colors" id="blue"></button>
+<button id="jpg">Save to jpg</button>
+<button id="png">Save to png</button>
+<script>
+    const canvas = document.getElementById('canvas');
+    const ctx = canvas.getContext('2d');
+    const black = document.getElementById('black');
+    const red = document.getElementById('red');
+    const yellow = document.getElementById('yellow');
+    const green = document.getElementById('green');
+    const blue = document.getElementById('blue');
+    const canvasContainer = document.querySelector('.container-canvas');
+
+    let isDrawing = false;
+    let colorDraw = 'black';
+
+    [black, red, yellow, green, blue,].forEach(item => {
+        item.addEventListener('click', () => {
+            colorDraw = item.id;
+        })
+    })
+    canvas.addEventListener('mousedown', () => {
+        isDrawing = true;
+        ctx.beginPath();
+    })
+    canvas.addEventListener('mousemove', (ev) => {
+        if (isDrawing) {
+            ctx.strokeStyle = colorDraw;
+            ctx.lineTo(ev.x, ev.y)
+            ctx.stroke();
+        }
+    })
+    canvas.addEventListener('mouseup', () => {
+        ctx.closePath();
+        isDrawing = false;
+    })
+
+    // todo resize function
+    canvasContainer.addEventListener('resize', (ev) => {
+        const {x, y} = ev;
+        console.log(x, y);
+    })
+
+    function downloadData(type = 'image/png') {
+        let image = canvas.toDataURL(type);
+        console.log(image);
+        const node = document.createElement('a');
+        node.href = image;
+        node.download = true;
+        node.click();
+    }
+
+    png.addEventListener('click', () => downloadData())
+    jpg.addEventListener('click', () => downloadData('image/jpeg'))
+</script>
+</body>
+</html>

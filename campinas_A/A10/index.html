@@ -1,0 +1,52 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Drip</title>
+    <style>
+        .container {
+            display: flex;
+            justify-content: center;
+        }
+
+        svg {
+            width: 400px;
+            aspect-ratio: 1;
+        }
+
+        svg circle {
+            animation: drop infinite 5s ease-in-out;
+        }
+
+        @keyframes drop {
+            from {
+                cy: 0;
+            }
+            to {
+                cy: 100%;
+            }
+        }
+    </style>
+</head>
+<body>
+<div class="container">
+    <svg viewBox="0 0 100 100" filter="url(#blurMe)">
+        <filter id="blurMe">
+            <feGaussianBlur stdDeviation="5"/>
+            <feColorMatrix
+                    type="matrix"
+                    values="1 0 0 0 0
+              0 1 0 0 0
+              0 0 1 0 0
+              0 0 0 -7 5"/>
+        </filter>
+        <rect rx="12" fill="black" width="100%" height="20" y="0"></rect>
+        <circle r="7" fill="black" cx="50%"/>
+        <rect rx="12" fill="black" width="100%" height="20" y="80"></rect>
+    </svg>
+</div>
+</body>
+</html>
